@@ -1,0 +1,17 @@
+const MASTER_LEVELS = [
+  { id: 1, title: "Apa Itu Algoritma?", type: "QUIZ", question: "Apa definisi utama dari sebuah algoritma?", options: ["Urutan langkah logis dan sistematis", "Kumpulan gambar acak", "Program komputer tanpa aturan"], correct: 0, hint: "Ingat prinsip langkah yang berurutan." },
+  { id: 2, title: "Urutkan Langkah", type: "PUZZLE", items: ["Didihkan air", "Masukkan teh", "Sajikan hangat"], correctOrder: [0, 1, 2], hint: "Air harus dididihkan terlebih dahulu." },
+  { id: 3, title: "Kenali Flowchart", type: "QUIZ", question: "Apa fungsi utama dari diagram alir (Flowchart)?", options: ["Menjelaskan alur program secara visual", "Menghias layar komputer", "Membuat suara musik"], correct: 0, hint: "Flowchart fokus pada visualisasi." },
+  { id: 4, title: "Simbol Flowchart", type: "QUIZ", question: "Simbol apa yang digunakan untuk Start dan End?", options: ["Oval (Terminator)", "Persegi Panjang", "Belah Ketupat"], correct: 0, hint: "Berbentuk lonjong atau oval." },
+  { id: 5, title: "Boss — Algorithm Master", type: "PUZZLE", items: ["Start", "Input Nilai", "Proses Kelulusan", "End"], correctOrder: [0, 1, 2, 3], hint: "Mulai dari Start lalu Input." },
+  { id: 6, title: "Input dan Output", type: "QUIZ", question: "Simbol untuk operasi Input/Output data adalah...", options: ["Jajaran Genjang", "Lingkaran", "Garis lurus"], correct: 0, hint: "Bentuknya mirip jajaran genjang miring." },
+  { id: 7, title: "Decision", type: "QUIZ", question: "Simbol belah ketupat digunakan untuk...", options: ["Percabangan kondisi (Decision)", "Menghapus data", "Mencetak kertas"], correct: 0, hint: "Digunakan saat ada pilihan Ya/Tidak." },
+  { id: 8, title: "Puzzle Flowchart", type: "PUZZLE", items: ["Mulai", "Baca Data", "Hitung", "Selesai"], correctOrder: [0, 1, 2, 3], hint: "Ikuti urutan standar sistem." },
+  { id: 9, title: "Detektif Algoritma", type: "QUIZ", question: "Mana penulisan kondisi KKM Lulus (>= 75) yang benar?", options: ["Nilai >= 75", "Nilai = 75", "Nilai < 75"], correct: 0, hint: "Lebih dari atau sama dengan." },
+  { id: 10, title: "Boss — Flowchart Guardian", type: "PUZZLE", items: ["Start", "Input Belanja", "Decision Total", "End"], correctOrder: [0, 1, 2, 3], hint: "Susun alur kasir otomatis." },
+  { id: 11, title: "Algoritma Percabangan", type: "QUIZ", question: "Jika kondisi IF bernilai salah, jalur mana yang diambil?", options: ["ELSE (Selain itu)", "Restart komputer", "Looping abadi"], correct: 0, hint: "Jalur alternatif selain kondisi utama." },
+  { id: 12, title: "Labirin Algoritma", type: "PUZZLE", items: ["Maju 2 langkah", "Belok Kanan", "Maju 1 langkah", "Selesai"], correctOrder: [0, 1, 2, 3], hint: "Ikuti jalur navigasi peta." },
+  { id: 13, title: "Debugging Challenge", type: "QUIZ", question: "Apa penyebab utama Infinite Loop?", options: ["Kondisi perulangan tidak pernah bernilai False", "Komputer kehabisan baterai", "Kabel monitor lepas"], correct: 0, hint: "Perhatikan variabel penghitung." },
+  { id: 14, title: "Flowchart Builder", type: "PUZZLE", items: ["Inisialisasi i=1", "Cek i<=10", "Cetak i", "Increment i"], correctOrder: [0, 1, 2, 3], hint: "Susun counted loop dengan benar." },
+  { id: 15, title: "Final Boss — Algorithm Legend", type: "QUIZ", question: "Apa istilah pemecahan masalah besar menjadi bagian kecil?", options: ["Dekomposisi", "Formatting", "Compiling"], correct: 0, hint: "Teknik memecah masalah." }
+];

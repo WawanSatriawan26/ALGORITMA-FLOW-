@@ -1,0 +1,1 @@
+function renderTeacherDashboard(){ if(typeof TeacherDashboardManager!=='undefined') TeacherDashboardManager.renderDashboard(); }

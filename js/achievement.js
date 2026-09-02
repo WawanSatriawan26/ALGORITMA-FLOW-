@@ -1,0 +1,1 @@
+function renderAchievementsUI(){ const g=document.getElementById('achievements-grid'); if(g) g.innerHTML='<p>Achievement Galeri</p>'; }

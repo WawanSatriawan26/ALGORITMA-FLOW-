@@ -1,0 +1,1 @@
+const LearningAnalytics = { recordSession(){}, getLogs(){ return []; }, calculateStatistics(){ return { totalSessions: 0, avgAccuracy: 0, totalTimeMinutes: 0, avgLearningScore: 0 }; }, getStrongestTopics(){ return ['Algoritma']; }, getWeakestTopics(){ return ['Debugging']; } };

@@ -1,0 +1,1 @@
+const REMEDIAL_CHALLENGE_DATA = { remedial: [], challenge: [] };

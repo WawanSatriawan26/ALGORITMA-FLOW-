@@ -1,0 +1,1 @@
+const AchievementSystem = { checkAndUnlock(){} };

@@ -1,0 +1,1 @@
+const STORY_DATA = { intro: { title: 'KEKACAAN DI ALGO WORLD', character: '🤖 Algobot', text: 'ALGO WORLD diserang Glitch Chaos! Tolong bantu aku memulihkan logika.', btnText: 'BANTU ALGOBOT! 🚀' }, levels: {}, bossDefeated: {}, ending: { title: 'ALGO WORLD PULIH!', character: '🤖 Algobot', text: 'Kemenangan Mutlak!', btnText: 'MENU UTAMA 🏆' } };

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ALGO FLOW QUEST - Petualangan Algoritma & Flowchart untuk Siswa SMP/MTs (Fase D)">
+  <title>ALGO FLOW QUEST | Petualangan Algoritma & Flowchart</title>
+  
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/game.css">
+  <link rel="stylesheet" href="./css/animation.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body>
+
+  <!-- ========================================== -->
+  <!-- PERSISTENT HUD BAR (TOP HEADER)             -->
+  <!-- ========================================== -->
+  <header id="main-hud" class="hud-container hidden">
+    <div class="hud-group profile-group">
+      <div class="hud-card avatar-card">🤖</div>
+      <div class="hud-info">
+        <span id="hud-player-name" class="hud-player-name">Siswa</span>
+        <span id="hud-player-rank" class="hud-player-rank">Pemula Logika</span>
+      </div>
+    </div>
+
+    <div class="hud-group stats-group">
+      <div class="hud-card" title="Level Akun">⭐ Lv.<span id="hud-level-num">1</span></div>
+      <div class="hud-card xp-wrapper" title="Experience Points">
+        <div class="xp-bar-fill" id="hud-xp-bar" style="width: 0%;"></div>
+        <span id="hud-xp-text" style="position:relative; z-index:2;">0/300 XP</span>
+      </div>
+      <div class="hud-card" title="Total Skor">🏆 <span id="hud-score-text">0</span></div>
+      <div class="hud-card" title="Koin Emas">🪙 <span id="hud-coin-text">0</span></div>
+      <div class="hud-card" title="Bintang Terkumpul">⭐ <span id="hud-star-text">0/45</span></div>
+      <div class="hud-card hidden" id="hud-lives-container">Nyawa: <span id="hud-lives-icons">❤️❤️❤️</span></div>
+      <div class="hud-card hidden" id="hud-timer-container">⏱️ <span id="hud-timer-text">00:00</span></div>
+      <div class="hud-card" id="hud-adaptive-badge" style="color:var(--accent-yellow-dark); font-weight:800;" title="Tingkat Kesulitan Adaptif">⚡ NORMAL</div>
+    </div>
+
+    <div class="hud-group action-group">
+      <button type="button" class="btn btn-icon" id="btn-hud-mute" title="Mute Audio">🔊</button>
+      <button type="button" class="btn btn-icon" id="btn-hud-settings" title="Pengaturan">⚙️</button>
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN SPA VIEWPORT CONTAINER                -->
+  <!-- ========================================== -->
+  <main id="app-container" class="app-viewport">
+
+    <!-- 1. SPLASH SCREEN -->
+    <section id="screen-splash" class="page-screen">
+      <div class="splash-card">
+        <span class="splash-icon">🚀</span>
+        <h1 class="splash-title">ALGO FLOW QUEST</h1>
+        <p class="splash-subtitle">Petualangan Interaktif Algoritma & Flowchart (Fase D SMP/MTs)</p>
+        <button type="button" id="btn-splash-start" class="btn btn-primary btn-large">
+          MULAI PETUALANGAN ▶️
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. MAIN MENU SCREEN -->
+    <section id="screen-main-menu" class="page-screen hidden">
+      <div class="menu-container">
+        <h2 style="font-family:var(--font-heading); color:var(--bg-dark-green); text-align:center; margin-bottom:24px; font-size:2rem;">MENU UTAMA ALGO WORLD</h2>
+        <div class="menu-cards-grid">
+          <button type="button" id="btn-menu-map" class="menu-card card-accent">
+            <span class="menu-card-icon">🗺️</span>
+            <h3>Peta Dunia (World Map)</h3>
+            <p>Jelajahi 5 region petualangan ALGO WORLD.</p>
+          </button>
+
+          <button type="button" id="btn-menu-learn" class="menu-card card-secondary">
+            <span class="menu-card-icon">📚</span>
+            <h3>Pusat Belajar</h3>
+            <p>Pelajari materi teori dasar flowchart & algoritma.</p>
+          </button>
+
+          <button type="button" id="btn-menu-dashboard" class="menu-card card-secondary">
+            <span class="menu-card-icon">📊</span>
+            <h3>Dashboard Siswa</h3>
+            <p>Lihat statistik, akurasi, dan analitik belajarmu.</p>
+          </button>
+
+          <button type="button" id="btn-menu-achievements" class="menu-card card-secondary">
+            <span class="menu-card-icon">🏆</span>
+            <h3>Pencapaian (Badge)</h3>
+            <p>Kumpulkan seluruh lencana prestasi master.</p>
+          </button>
+        </div>
+
+        <footer style="display:flex; gap:12px; margin-top:28px; justify-content:center; flex-wrap:wrap;">
+          <button type="button" id="btn-menu-profile" class="btn btn-secondary">👤 Profil Saya</button>
+          <button type="button" id="btn-menu-freeplay" class="btn btn-secondary" onclick="FreePlayManager.openSetup()">🎮 Free Play</button>
+          <button type="button" id="btn-menu-remedial" class="btn btn-secondary" onclick="RemedialChallengeManager.checkEligibilityAndOpen('REMEDIAL')">🆘 Mode Remedial</button>
+          <button type="button" id="btn-menu-challenge" class="btn btn-secondary" onclick="RemedialChallengeManager.checkEligibilityAndOpen('CHALLENGE')">🚀 Mode Challenge</button>
+          <button type="button" id="btn-menu-teacher" class="btn btn-secondary">👨‍🏫 Mode Guru</button>
+          <button type="button" id="btn-menu-settings" class="btn btn-secondary">⚙️ Pengaturan</button>
+        </footer>
+      </div>
+    </section>
+
+    <!-- 3. WORLD MAP / LEVEL SELECT SCREEN -->
+    <section id="screen-level-select" class="page-screen hidden">
+      <div class="page-header">
+        <h2>Peta Petualangan ALGO WORLD</h2>
+        <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+      </div>
+      <div class="map-viewport">
+        <div id="level-nodes-container" class="level-nodes-grid"></div>
+      </div>
+    </section>
+
+    <!-- 4. ACTIVE GAMEPLAY AREA SCREEN -->
+    <section id="screen-game-area" class="page-screen hidden">
+      <div class="game-top-bar">
+        <button type="button" class="btn btn-back btn-to-map">🗺️ Peta</button>
+        <div class="algobot-speech-box">
+          <span style="font-size:1.5rem;">🤖</span>
+          <span id="algobot-speech-text">Algobot siap membantumu!</span>
+        </div>
+        <button type="button" id="btn-game-hint" class="btn btn-secondary">💡 Hint</button>
+      </div>
+
+      <div class="game-canvas-area">
+        <!-- Sub-Game 1: Puzzle (Drag & Drop / Urutkan) -->
+        <div id="sub-game-puzzle" class="sub-game-pane hidden">
+          <h3 style="margin-bottom:12px; font-family:var(--font-heading);">Rangkai Urutan Langkah</h3>
+          <div id="puzzle-bank-container" class="puzzle-bank"></div>
+          <div id="puzzle-slots-container" class="puzzle-slots"></div>
+        </div>
+
+        <!-- Sub-Game 2: Quiz Pilihan Ganda -->
+        <div id="sub-game-quiz" class="sub-game-pane hidden">
+          <h3 id="quiz-question-text" style="margin-bottom:16px; font-family:var(--font-heading); font-size:1.2rem;">Pertanyaan Kuis</h3>
+          <div id="quiz-options-container" class="quiz-options-grid"></div>
+        </div>
+      </div>
+
+      <div class="game-bottom-bar">
+        <button type="button" id="btn-game-execute" class="btn btn-primary btn-large" style="width: 100%; max-width: 400px;">
+          EKSEKUSI & VERIFIKASI ⚡
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. LEARNING THEORY SCREEN -->
+    <section id="screen-learn" class="page-screen hidden">
+      <div class="page-header">
+        <h2>Pusat Belajar Teori</h2>
+        <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+      </div>
+      <div class="content-card" style="max-width:800px; margin:0 auto; background:var(--white); padding:28px; border-radius:var(--radius-lg);">
+        <h3 style="color:var(--bg-dark-green); margin-bottom:12px; font-family:var(--font-heading);">Materi Dasar Berpikir Komputasional</h3>
+        <p style="margin-bottom:14px; line-height:1.6;">Algoritma adalah urutan langkah-langkah logis penyelesaian masalah yang disusun secara sistematis. Dalam ALGO WORLD, algoritma direpresentasikan melalui visualisasi simbol-simbol Flowchart standar.</p>
+        <ul style="padding-left:20px; line-height:1.6; margin-bottom:16px;">
+          <li><strong>Terminator (Oval)</strong>: Menandai awal (Start) dan akhir (End) program.</li>
+          <li><strong>Input / Output (Jajaran Genjang)</strong>: Digunakan saat membaca data masuk atau mencetak data keluar.</li>
+          <li><strong>Process (Persegi Panjang)</strong>: Menunjukkan proses perhitungan atau pengolahan data.</li>
+          <li><strong>Decision (Belah Ketupat)</strong>: Digunakan untuk percabangan kondisi logika (Ya/Tidak).</li>
+        </ul>
+        <button type="button" class="btn btn-primary btn-to-main">MENGERTI, KEMBALI KE MENU 🏠</button>
+      </div>
+    </section>
+
+    <!-- 6. STUDENT DASHBOARD SCREEN -->
+    <section id="screen-dashboard" class="page-screen hidden">
+      <div class="page-header">
+        <h2>Dashboard Siswa</h2>
+        <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+      </div>
+      <div class="content-card" style="max-width:700px; margin:0 auto; background:var(--white); padding:28px; border-radius:var(--radius-lg);">
+        <h3 id="dash-player-name" style="font-family:var(--font-heading); color:var(--bg-dark-green);">Nama: Siswa</h3>
+        <p id="dash-player-rank" style="color:var(--accent-blue); font-weight:700; margin-top:4px;">Gelar: Pemula Logika</p>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin:20px 0;">
+          <div style="background:var(--off-white); padding:14px; border-radius:var(--radius-sm);" id="dash-completed-levels">Level Selesai: 0 / 15</div>
+          <div style="background:var(--off-white); padding:14px; border-radius:var(--radius-sm);" id="dash-total-score">Total Skor: 0</div>
+          <div style="background:var(--off-white); padding:14px; border-radius:var(--radius-sm);" id="dash-accuracy">Akurasi Jawaban: 0%</div>
+          <div style="background:var(--off-white); padding:14px; border-radius:var(--radius-sm);" id="dash-player-coins">Koin: 0 🪙</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ACHIEVEMENTS SCREEN -->
+    <section id="screen-achievements" class="page-screen hidden">
+      <div class="page-header">
+        <h2>Galeri Pencapaian & Badge</h2>
+        <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+      </div>
+      <div id="achievements-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; max-width:900px; margin:0 auto;"></div>
+    </section>
+
+    <!-- 8. TEACHER MODE SCREEN -->
+    <section id="screen-teacher-mode" class="page-screen hidden">
+      <div class="page-header">
+        <h2>Mode Guru — Laporan Akademik</h2>
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="btn btn-primary" onclick="window.print()">Cetak PDF 🖨️</button>
+          <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+        </div>
+      </div>
+      <div id="printable-teacher-report" style="background:var(--white); padding:32px; border-radius:var(--radius-lg); max-width:800px; margin:0 auto; box-shadow:var(--shadow-md);"></div>
+    </section>
+
+    <!-- 9. PROFILE EDIT SCREEN -->
+    <section id="screen-profile" class="page-screen hidden">
+      <div class="page-header">
+        <h2>Pengaturan Profil Siswa</h2>
+        <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+      </div>
+      <div style="background:var(--white); padding:28px; border-radius:var(--radius-lg); max-width:500px; margin:0 auto;">
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-weight:700; margin-bottom:6px;">Nama Lengkap:</label>
+          <input type="text" id="input-player-name" class="input-text" style="width:100%; padding:10px; border:2px solid var(--border-light); border-radius:var(--radius-sm);" value="Siswa">
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="display:block; font-weight:700; margin-bottom:6px;">Kelas / Rombel:</label>
+          <input type="text" id="input-player-class" class="input-text" style="width:100%; padding:10px; border:2px solid var(--border-light); border-radius:var(--radius-sm);" value="7-A">
+        </div>
+        <button type="button" id="btn-save-profile" class="btn btn-primary" style="width:100%;">SIMPAN PROFIL 💾</button>
+      </div>
+    </section>
+
+    <!-- 10. REMEDIAL & CHALLENGE MODE -->
+    <section id="screen-remedial-challenge" class="page-screen hidden">
+      <div class="page-header">
+        <h2 id="rc-screen-title">Pusat Pelatihan Tambahan</h2>
+        <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius-lg); padding:28px; max-width:700px; margin:0 auto; box-shadow:var(--shadow-md); width:100%;">
+        <div id="rc-content-container"></div>
+      </div>
+    </section>
+
+    <!-- 11. FREE PLAY / PRACTICE MODE -->
+    <section id="screen-free-play" class="page-screen hidden">
+      <div class="page-header">
+        <h2>Mode Latihan Bebas</h2>
+        <button type="button" class="btn btn-back btn-to-main">⬅️ Menu Utama</button>
+      </div>
+      <div id="freeplay-content-container" style="background:var(--white); border-radius:var(--radius-lg); padding:28px; max-width:700px; margin:0 auto; box-shadow:var(--shadow-md); width:100%;"></div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- GLOBAL MODALS & OVERLAYS                   -->
+  <!-- ========================================== -->
+  
+  <!-- SETTINGS MODAL -->
+  <div id="modal-settings" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 style="font-family:var(--font-heading); color:var(--bg-dark-green); margin-bottom:16px;">Pengaturan Game</h3>
+      <div style="display:flex; flex-direction:column; gap:14px; text-align:left; margin-bottom:20px;">
+        <label style="display:flex; justify-content:space-between; align-items:center; font-weight:700;">
+          Mute Suara Master:
+          <button type="button" id="btn-toggle-master-mute" class="btn btn-secondary">🔊 ON/OFF</button>
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center; font-weight:700;">
+          Efek Suara (SFX):
+          <button type="button" id="btn-toggle-sfx" class="btn btn-secondary">Aktif</button>
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center; font-weight:700;">
+          Musik Latar (BGM):
+          <button type="button" id="btn-toggle-music" class="btn btn-secondary">Aktif</button>
+        </label>
+        <div>
+          <label style="font-size:0.9rem; font-weight:700;">Volume SFX:</label>
+          <input type="range" id="slider-sfx-vol" min="0" max="1" step="0.1" value="0.8" style="width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.9rem; font-weight:700;">Volume Musik:</label>
+          <input type="range" id="slider-music-vol" min="0" max="1" step="0.1" value="0.5" style="width:100%;">
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button type="button" id="btn-reset-data" class="btn" style="background:var(--accent-red); color:var(--white);">Reset Data ⚠️</button>
+        <button type="button" class="btn btn-primary btn-close-settings">Tutup ✖️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION & THINK BRIEFING MODAL (FITUR 1) -->
+  <div id="modal-mission-briefing" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width: 520px; text-align: left;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+        <span style="font-size:2.5rem;">📜</span>
+        <div>
+          <span style="font-size:0.85rem; font-weight:800; color:var(--accent-blue);">BRIEFING MISI — LEVEL <span id="briefing-level-num">1</span></span>
+          <h3 id="briefing-level-title" style="font-family:var(--font-heading); color:var(--bg-dark-green); font-size:1.3rem;">Judul Level</h3>
+        </div>
+      </div>
+
+      <div style="background:var(--off-white); border-radius:var(--radius-md); padding:14px; margin-bottom:12px; border-left:4px solid var(--primary-orange);">
+        <strong style="color:var(--primary-orange); font-size:0.9rem;">🎯 MISI KAMU:</strong>
+        <p id="briefing-mission-text" style="font-size:0.95rem; color:var(--text-dark); margin-top:2px;">Deskripsi misi...</p>
+      </div>
+
+      <div style="background:var(--off-white); border-radius:var(--radius-md); padding:14px; margin-bottom:12px; border-left:4px solid var(--accent-blue);">
+        <strong style="color:var(--accent-blue); font-size:0.9rem;">🎓 TUJUAN PEMBELAJARAN:</strong>
+        <p id="briefing-objective-text" style="font-size:0.9rem; color:var(--text-dark); margin-top:2px;">Tujuan pembelajaran...</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-size:0.88rem; color:var(--text-muted);"><strong>⚡ Tantangan:</strong> <span id="briefing-challenge-text">...</span></p>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-top:4px;"><strong>📌 Instruksi:</strong> <span id="briefing-instruction-text">...</span></p>
+      </div>
+
+      <button type="button" id="btn-start-mission-play" class="btn btn-primary btn-large" style="width:100%;">
+        SIAP, MULAI TANTANGAN! ▶️
+      </button>
+    </div>
+  </div>
+
+  <!-- EVALUATION & REWARD SUMMARY MODAL (FITUR 1) -->
+  <div id="modal-evaluation-summary" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width: 500px;">
+      <h2 style="color:var(--primary-orange); font-family:var(--font-heading); font-size:1.8rem;">EVALUASI LEVEL <span id="eval-level-num">1</span></h2>
+      <div style="font-size:2.8rem; margin:10px 0;" id="eval-stars-display">⭐⭐⭐</div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:16px; text-align:center;">
+        <div style="background:var(--off-white); padding:10px; border-radius:var(--radius-sm);">
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">TOTAL SKOR</span>
+          <p id="eval-score-text" style="font-size:1.1rem; font-weight:800; color:var(--accent-green);">1,000</p>
+        </div>
+        <div style="background:var(--off-white); padding:10px; border-radius:var(--radius-sm);">
+          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">IMBALAN</span>
+          <p style="font-size:0.95rem; font-weight:800; color:var(--accent-blue);"><span id="eval-xp-text">+150 XP</span> (<span id="eval-coins-text">+75 🪙</span>)</p>
+        </div>
+      </div>
+
+      <div style="background:rgba(16, 185, 129, 0.1); border:1px solid var(--accent-green); border-radius:var(--radius-md); padding:12px; text-align:left; margin-bottom:12px;">
+        <strong style="color:var(--accent-green); font-size:0.85rem;">🤖 FEEDBACK ALGOBOT:</strong>
+        <p id="eval-feedback-text" style="font-size:0.9rem; color:var(--text-dark); margin-top:2px;">Feedback edukatif...</p>
+      </div>
+
+      <div style="background:rgba(17, 138, 178, 0.1); border:1px solid var(--accent-blue); border-radius:var(--radius-md); padding:12px; text-align:left; margin-bottom:16px;">
+        <strong style="color:var(--accent-blue); font-size:0.85rem;">💡 REFLEKSI PEMBELAJARAN:</strong>
+        <p id="eval-reflection-text" style="font-size:0.9rem; color:var(--text-dark); margin-top:2px;">Refleksi evaluasi...</p>
+      </div>
+
+      <div class="modal-actions-row">
+        <button type="button" id="btn-eval-map" class="btn btn-secondary">Peta 🗺️</button>
+        <button type="button" id="btn-eval-next" class="btn btn-primary">Lanjut Level ▶️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY / ADVENTURE DIALOG MODAL (FITUR 2) -->
+  <div id="modal-story-dialog" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width: 500px; text-align: left; border-color: var(--accent-blue);">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; border-bottom:2px dashed var(--border-light); padding-bottom:10px;">
+        <span style="font-size:2.8rem;">🤖</span>
+        <div>
+          <span id="story-modal-character" style="font-size:0.85rem; font-weight:800; color:var(--accent-blue);">Algobot</span>
+          <h3 id="story-modal-title" style="font-family:var(--font-heading); color:var(--bg-dark-green); font-size:1.25rem;">Cerita ALGO WORLD</h3>
+        </div>
+      </div>
+
+      <div style="background:var(--off-white); border-radius:var(--radius-md); padding:16px; margin-bottom:18px; border-left:5px solid var(--accent-blue);">
+        <p id="story-modal-text" style="font-size:0.95rem; color:var(--text-dark); line-height:1.5;">Teks dialog cerita akan tampil di sini...</p>
+      </div>
+
+      <button type="button" id="btn-story-continue" class="btn btn-primary btn-large" style="width:100%;">
+        LANJUTKAN ▶️
+      </button>
+    </div>
+  </div>
+
+  <!-- LEVEL RESULT MODAL (LEGACY FALLBACK) -->
+  <div id="modal-level-result" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h2 style="color:var(--primary-orange); font-family:var(--font-heading);">LEVEL SELESAI!</h2>
+      <div style="font-size:2.5rem; margin:10px 0;" id="res-stars">⭐⭐⭐</div>
+      <p style="font-size:1.1rem; font-weight:800; margin-bottom:8px;">Skor: <span id="res-score">1000</span></p>
+      <p style="font-size:0.95rem; color:var(--accent-blue); margin-bottom:20px;" id="res-xp">+150 XP (+50 🪙)</p>
+      <div class="modal-actions-row">
+        <button type="button" id="btn-res-map" class="btn btn-secondary">Peta 🗺️</button>
+        <button type="button" id="btn-res-next" class="btn btn-primary">Lanjut ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT ENGINE (SEQUENTIAL RELATIVE LOAD) -->
+  <!-- ========================================== -->
+  <script src="./js/config.js"></script>
+  <script src="./js/level.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/audio.js"></script>
+  
+  <!-- Feature Modules -->
+  <script src="./js/player.js"></script>
+  <script src="./js/gameplayLoopData.js"></script>
+  <script src="./js/gameplayLoop.js"></script>
+  <script src="./js/storyData.js"></script>
+  <script src="./js/story.js"></script>
+  <script src="./js/worldmapData.js"></script>
+  <script src="./js/worldmap.js"></script>
+  <script src="./js/adaptive.js"></script>
+  <script src="./js/assessment.js"></script>
+  <script src="./js/analytics.js"></script>
+  <script src="./js/teacherDashboard.js"></script>
+  <script src="./js/remedialChallengeData.js"></script>
+  <script src="./js/remedialChallenge.js"></script>
+  <script src="./js/freePlay.js"></script>
+  <script src="./js/achievementData.js"></script>
+  <script src="./js/achievementSystem.js"></script>
+  <script src="./js/teacher.js"></script>
+  <script src="./js/achievement.js"></script>
+  
+  <!-- Core Engine & Minigames -->
+  <script src="./js/minigames.js"></script>
+  <script src="./js/game.js"></script>
+  
+  <!-- Navigation & Main App Orchestrator -->
+  <script src="./js/navigation.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

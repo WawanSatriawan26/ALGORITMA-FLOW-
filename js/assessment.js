@@ -1,0 +1,1 @@
+const LearningAssessment = { LEVEL_COMPETENCY_MAP: {}, recordAttempt(){}, calculateOverallMetrics(){ return { percentage: 80, category: 'Baik', totalAttempted: 1, totalCorrect: 1, timeSeconds: 10, competencies: {} }; } };
