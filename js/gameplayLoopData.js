@@ -1,1 +1,0 @@
-const GAMEPLAY_LOOP_DATA = { 1: { mission: 'Membantu Algobot.', learningObjective: 'Memahami algoritma.', challenge: 'Jawab kuis logika.', instruction: 'Pilih jawaban tepat.', feedbackCorrect: 'Tepat sekali!', feedbackWrong: 'Coba lagi.', evaluationReflection: 'Kamu paham dasar algoritma.' } };

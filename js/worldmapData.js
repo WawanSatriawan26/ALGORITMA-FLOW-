@@ -1,1 +1,0 @@
-const WORLD_MAP_REGIONS = [{ id: 'region_1', name: 'Region 1 — Algorithm Village', description: 'Desa awal algoritma.', levels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], icon: '🏡', bossLevelId: 5 }];

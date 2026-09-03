@@ -1,1 +1,0 @@
-const ACHIEVEMENT_DEFINITIONS = [{ id: 'first_win', title: 'Algorithm Beginner', desc: 'Selesaikan level pertama.', icon: '🌱', condition: () => true }];

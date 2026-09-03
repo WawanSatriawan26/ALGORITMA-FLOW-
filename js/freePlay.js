@@ -1,1 +1,0 @@
-const FreePlayManager = { openSetup(){} };

@@ -1,1 +1,0 @@
-const AdaptiveEngine = { evaluateLevelPerformance(){}, applyAdaptiveAdjustments(){}, updateAdaptiveUI(){} };
