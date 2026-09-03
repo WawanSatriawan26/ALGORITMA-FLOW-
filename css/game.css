@@ -1,88 +1,196 @@
+/* ==========================================================================
+   ALGO FLOW QUEST — GAME.CSS (DARK EMERALD THEME)
+   ========================================================================== */
+
+/* TOPBAR NAVIGASI GAME */
 .topbar {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 24px;
-  background: #FFFFFF;
-  border-bottom: 2px solid var(--garis);
+  background: rgba(19, 58, 48, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .judul-bar {
   font-weight: 900;
   font-size: 18px;
-  color: var(--primary-tua);
+  color: var(--accent-gold);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .judul-bar small {
   display: block;
   font-size: 12px;
-  color: #64748B;
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
-.spacer { flex: 1; }
+.spacer { 
+  flex: 1; 
+}
 
 .icon-btn {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 2px solid var(--garis);
-  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-light);
   cursor: pointer;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+.icon-btn:hover {
+  background: var(--accent-green);
+  color: #000;
+  transform: scale(1.08);
+}
+
+/* CONTAINER UTAMA KONTEN GAME & MODUL */
 .content-scroll {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 24px;
+  padding-bottom: 30px;
 }
 
 .modules-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  padding: 0 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0 24px 30px 24px;
 }
 
 .mod-card {
-  background: #FFFFFF;
-  border: 2px solid var(--garis);
-  border-radius: 20px;
-  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.mod-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
 }
 
 .mod-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--primary);
+  transform: translateY(-6px);
+  border-color: var(--accent-green);
+  background: var(--bg-card-hover);
+  box-shadow: 0 12px 30px rgba(46, 204, 113, 0.2);
 }
 
-.mod-icon { font-size: 32px; }
+.mod-icon {
+  font-size: 38px;
+  background: rgba(0, 0, 0, 0.3);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
 
+.mod-card h3 {
+  font-size: 20px;
+  color: var(--accent-gold);
+  font-weight: 800;
+}
+
+.mod-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* AREA PANGGUNG GAME / MINI GAME STAGE */
 .stage-container {
   flex: 1;
   position: relative;
-  padding: 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  margin: 16px 24px;
+  border: 1px solid var(--border-color);
 }
 
+#bermain-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow-glow);
+  color: var(--text-light);
+}
+
+/* NAVBAR BAWAAH */
 .navbar {
   padding: 16px 24px;
-  border-top: 2px solid var(--garis);
-  background: #FFFFFF;
+  border-top: 1px solid var(--border-color);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
 }
 
 .nav-btn {
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 99px;
-  border: none;
-  font-weight: 900;
+  border: 1px solid var(--border-color);
+  font-weight: 800;
+  font-size: 14px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.nav-back { background: #E2E8F0; color: #475569; }
+.nav-back { 
+  background: rgba(255, 255, 255, 0.1); 
+  color: var(--text-light); 
+}
+
+.nav-back:hover {
+  background: var(--border-color);
+  color: var(--accent-gold);
+}
+
+/* PENYESUAIAN MOBILE RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .stage-container {
+    margin: 10px;
+    padding: 14px;
+  }
+
+  .modules-grid {
+    padding: 0 14px 20px 14px;
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    padding: 12px 14px;
+  }
+}
