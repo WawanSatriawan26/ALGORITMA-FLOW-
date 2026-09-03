@@ -1,0 +1,134 @@
+:root {
+  --primary: #3498DB;
+  --primary-tua: #1D3557;
+  --biru-muda: #F0F9FF;
+  --kuning: #F1C40F;
+  --kuning-tua: #D35400;
+  --garis: #CBD5E1;
+  --tinta: #1E293B;
+  --bayang: 0 10px 25px rgba(0,0,0,0.1);
+  --bayang-kecil: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #F8FAFC;
+  color: var(--tinta);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#app-root {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.hero-box {
+  margin: auto;
+  text-align: center;
+  max-width: 600px;
+  padding: 30px;
+  background: #FFFFFF;
+  border: 3px solid var(--garis);
+  border-radius: 24px;
+  box-shadow: var(--bayang);
+}
+
+.main-title {
+  font-size: 36px;
+  color: var(--primary-tua);
+  margin-bottom: 10px;
+}
+
+.main-sub {
+  font-size: 16px;
+  color: #64748B;
+  margin-bottom: 24px;
+}
+
+.input-profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.input-profile-card input {
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid var(--garis);
+  font-size: 16px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 99px;
+  border: none;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.btn-kuning { background: var(--kuning); color: #856404; }
+.btn-biru { background: var(--primary); color: #FFFFFF; }
+.btn-xl { font-size: 18px; padding: 14px 28px; }
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-bg.active { display: flex; }
+
+.modal {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 24px;
+  width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.tutup {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}

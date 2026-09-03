@@ -1,0 +1,19 @@
+@media print {
+  body * { visibility: hidden; }
+  .modal-print-target, .modal-print-target * { visibility: visible; }
+  .modal-print-target {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+  }
+  .no-print { display: none !important; }
+}
+
+@media screen and (max-width: 768px) {
+  .status-dashboard-grid, .modules-grid, .td-grid-columns {
+    grid-template-columns: 1fr !important;
+  }
+  .modal { width: 95% !important; }
+  .status-col { border-right: none; border-bottom: 1px dashed var(--garis); padding-bottom: 8px; }
+}

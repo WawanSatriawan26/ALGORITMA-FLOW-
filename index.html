@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALGO FLOW QUEST — Media Pembelajaran Interaktif</title>
+
+  <!-- Modular CSS Imports (Relative Paths) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/gamification.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ROOT APPLICATION CONTAINER -->
+  <div id="app-root">
+
+    <!-- 1. SCREEN: JUDUL / BERANDA -->
+    <section id="scr-judul" class="screen active">
+      <div class="hero-box">
+        <h1 class="main-title">🚀 ALGO FLOW QUEST</h1>
+        <p class="main-sub">Petualangan Interaktif Belajar Algoritma, Tipe Data, Pseudocode, & Flowchart</p>
+        
+        <div class="input-profile-card">
+          <label for="inp-nama">Masukkan Nama Anda:</label>
+          <input type="text" id="inp-nama" placeholder="Contoh: Budi Santoso" value="Siswa Aktif">
+          <label for="inp-kelas">Kelas / Unit:</label>
+          <input type="text" id="inp-kelas" placeholder="Contoh: X-Informatika 1" value="X-Informatika 1">
+          <button class="btn btn-kuning btn-xl" id="btn-start-game" onclick="mulaiPetualangan()">🎮 MULAI PETUALANGAN</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SCREEN: MENU UTAMA / WORLD MAP -->
+    <section id="scr-menu" class="screen">
+      <div class="topbar">
+        <div class="judul-bar">🧭 Flowquest Isle<small>Pilih Modul Pembelajaran Anda</small></div>
+        <div class="spacer"></div>
+        
+        <!-- Dashboard Summary Widget -->
+        <div class="hud-quest-widget" onclick="openModal('modal-quest-log'); renderQuestLogUI();">
+          📜 Quest Aktif: <span id="hud-quest-active-count">0</span>
+        </div>
+
+        <div class="ap-badge">💎 AP: <span id="hud-ap-angka">0</span></div>
+        <div class="xp-badge">⚡ XP: <span id="hud-xp-angka">0</span></div>
+
+        <!-- Action Navigation Buttons -->
+        <button class="icon-btn" onclick="openModal('modal-quest-log'); renderQuestLogUI();" title="Quest Log">📜</button>
+        <button class="icon-btn" onclick="openModal('modal-daily-login'); renderDailyLoginCalendar();" title="Daily Login">🎁</button>
+        <button class="icon-btn" onclick="openModal('modal-leaderboard'); switchLeaderboardTab('demo');" title="Papan Peringkat">📊</button>
+        <button class="icon-btn" onclick="openModal('modal-badges');" title="Lencana">🏆</button>
+        <button class="icon-btn" onclick="openModal('modal-teacher-dashboard'); renderTeacherDashboard();" title="Dasbor Guru">👨‍🏫</button>
+        <button class="icon-btn" onclick="toggleAudioMute()" id="sound-toggle" title="Mute Sound">🔊</button>
+      </div>
+
+      <div class="content-scroll">
+        <!-- Integrated Status Dashboard Panel -->
+        <div class="status-dashboard-grid">
+          <div class="status-col">
+            <div class="status-col-title">👤 PLAYER</div>
+            <div class="status-item"><span>Nama:</span> <span class="status-val" id="hud-player-nama">Siswa</span></div>
+            <div class="status-item"><span>Kelas:</span> <span class="status-val" id="hud-player-kelas">X-1</span></div>
+            <div class="status-item"><span>Rank:</span> <span class="status-val" id="hud-player-rank">🌱 Novice</span></div>
+          </div>
+          <div class="status-col">
+            <div class="status-col-title">🎮 GAME</div>
+            <div class="status-item"><span>Score:</span> <span class="status-val" id="hud-game-score">0</span></div>
+            <div class="status-item"><span>XP:</span> <span class="status-val" id="hud-game-xp">0</span></div>
+            <div class="status-item"><span>Nyawa:</span> <span id="hud-game-heart">❤️❤️❤️</span></div>
+          </div>
+          <div class="status-col">
+            <div class="status-col-title">💎 GAMIFICATION</div>
+            <div class="status-item"><span>Algo Point:</span> <span class="status-val" style="color:#27AE60;">💎 <span id="hud-gm-ap">0</span> AP</span></div>
+            <div class="status-item"><span>Combo:</span> <span class="status-val" id="hud-gm-combo">0x</span></div>
+            <div class="status-item"><span>Win Streak:</span> <span class="status-val" id="hud-gm-streak">0x</span></div>
+          </div>
+          <div class="status-col">
+            <div class="status-col-title">📜 PINTASAN QUEST</div>
+            <div class="quest-quick-badge" onclick="openModal('modal-quest-log'); switchQuestTab('daily');">
+              <span>⚡ Daily Quest</span>
+            </div>
+            <div class="quest-quick-badge" onclick="openModal('modal-quest-log'); switchQuestTab('main');">
+              <span>📌 Main Mission</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- World Map Modules Grid -->
+        <div class="modules-grid">
+          <div class="mod-card" onclick="pilihModul(1)">
+            <div class="mod-icon">💡</div>
+            <h3>Bab 1: Konsep Algoritma</h3>
+            <p>Pelajari 5 Ciri Algoritma Donald Knuth dan logika runtutan dasar.</p>
+            <button class="btn btn-biru">Mulai Belajar ▶</button>
+          </div>
+
+          <div class="mod-card" onclick="pilihModul(2)">
+            <div class="mod-icon">🔢</div>
+            <h3>Bab 2: Variabel & Tipe Data</h3>
+            <p>Pahami Integer, Float, String, dan Boolean secara konkret.</p>
+            <button class="btn btn-biru">Mulai Belajar ▶</button>
+          </div>
+
+          <div class="mod-card" onclick="pilihModul(3)">
+            <div class="mod-icon">📝</div>
+            <h3>Bab 3: Pseudocode Baku</h3>
+            <p>Kuasai struktur PROGRAM, DEKLARASI, READ, dan WRITE.</p>
+            <button class="btn btn-biru">Mulai Belajar ▶</button>
+          </div>
+
+          <div class="mod-card" onclick="pilihModul(4)">
+            <div class="mod-icon">📊</div>
+            <h3>Bab 4: Simbol Flowchart</h3>
+            <p>Rancang diagram alir menggunakan simbol standar internasional.</p>
+            <button class="btn btn-biru">Mulai Belajar ▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SCREEN: LAYAR BERMAIN (GAME BOARD STAGE) -->
+    <section id="scr-bermain" class="screen">
+      <div class="topbar">
+        <div class="judul-bar">Bermain<small id="bermain-sub">Aktivitas Interaktif</small></div>
+        <div class="spacer"></div>
+        <div class="skor-badge">🏆 Skor: <span id="skor-bermain-angka">0</span></div>
+        <div class="streak-hud-box" id="hud-streak-wrap">
+          <div class="streak-cur">🔥 Streak: <span id="hud-current-streak">0</span>x</div>
+        </div>
+        <div class="ap-badge">💎 <span id="hud-ap-angka-game">0</span> AP</div>
+        <button class="icon-btn" onclick="goMenu()">☰</button>
+      </div>
+
+      <div class="stage-container" id="stage">
+        <!-- Algobot Floating Dialog -->
+        <div id="algobot-dialog-box" class="algobot-box">
+          <div class="algobot-avatar">🤖</div>
+          <div id="algobot-dialog-text">Halo! Aku Algobot. Mari kita selesaikan tantangan ini bersama!</div>
+        </div>
+
+        <div class="content" id="bermain-content">
+          <!-- Content diinjeksi via JS -->
+        </div>
+      </div>
+
+      <div class="navbar">
+        <button class="nav-btn nav-back" onclick="goMenu()">◀ Kembali ke Menu</button>
+      </div>
+    </section>
+
+    <!-- 4. MODAL: QUEST LOG CENTER -->
+    <div class="modal-bg" id="modal-quest-log">
+      <div class="modal">
+        <button class="tutup" onclick="closeModal('modal-quest-log')">✕</button>
+        <h3 style="text-align: center; margin-bottom: 6px;">📜 Pusat Quest Log (Jurnal Misi)</h3>
+        <p style="text-align: center; color: #475569; margin-bottom: 16px;">Pantau seluruh progress misi utama, harian, mingguan, dan tantangan spesialmu!</p>
+
+        <div class="quest-tabs-nav">
+          <button class="quest-tab-btn active" id="q-tab-main" onclick="switchQuestTab('main')">📌 Main Mission</button>
+          <button class="quest-tab-btn" id="q-tab-daily" onclick="switchQuestTab('daily')">⚡ Daily Mission</button>
+          <button class="quest-tab-btn" id="q-tab-weekly" onclick="switchQuestTab('weekly')">📅 Weekly Mission</button>
+          <button class="quest-tab-btn" id="q-tab-special" onclick="switchQuestTab('special')">🔥 Special Challenge</button>
+        </div>
+
+        <div class="quest-cards-list" id="quest-log-cards-container">
+          <!-- Render Dynamic Quests -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. MODAL: DAILY LOGIN REWARD -->
+    <div class="modal-bg" id="modal-daily-login">
+      <div class="modal" style="width: 800px; text-align: center;">
+        <button class="tutup" onclick="closeModal('modal-daily-login')">✕</button>
+        <h3>🎁 Hadiah Login Harian (Daily Login Reward)</h3>
+        <p id="daily-login-status-info" style="color: #475569; margin-bottom: 16px;">Login setiap hari untuk klaim Algo Point & Lencana Spesial Hari ke-7!</p>
+
+        <div class="daily-login-grid" id="daily-login-calendar-grid">
+          <!-- Render Calendar Days -->
+        </div>
+
+        <button class="btn btn-kuning" id="btn-claim-daily-login" style="margin-top: 16px; padding: 12px 24px; font-size: 18px;" onclick="claimDailyLoginReward()">
+          🎁 Klaim Hadiah Hari Ini
+        </button>
+      </div>
+    </div>
+
+    <!-- 6. MODAL: LEADERBOARD -->
+    <div class="modal-bg" id="modal-leaderboard">
+      <div class="modal">
+        <button class="tutup" onclick="closeModal('modal-leaderboard')">✕</button>
+        <h3 style="text-align: center;">📊 Papan Peringkat (Leaderboard)</h3>
+        <div id="leaderboard-list-container" style="margin-top: 16px;">
+          <!-- Render Dynamic Leaderboard -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. MODAL: BADGES & ACHIEVEMENTS -->
+    <div class="modal-bg" id="modal-badges">
+      <div class="modal">
+        <button class="tutup" onclick="closeModal('modal-badges')">✕</button>
+        <h3 style="text-align: center;">🏆 Koleksi Lencana (Achievements)</h3>
+        <div class="badge-grid-container" id="badges-grid-container" style="margin-top: 16px;">
+          <!-- Render Badges Grid -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. MODAL: TEACHER DASHBOARD & PRINT REPORT -->
+    <div class="modal-bg" id="modal-teacher-dashboard">
+      <div class="modal modal-print-target" style="width: 900px;">
+        <button class="tutup no-print" onclick="closeModal('modal-teacher-dashboard')">✕</button>
+        
+        <div class="td-print-header">
+          <h2>📊 LAPORAN CAPAIAN PEMBELAJARAN SISWA</h2>
+          <p>Media Pembelajaran Interaktif (MPI) — Algoritma & Flowchart</p>
+          <hr style="border: 1px solid var(--garis); margin: 12px 0;">
+        </div>
+
+        <div class="td-profile-box">
+          <div class="td-p-col"><span>Nama Siswa:</span> <b id="td-nama">-</b></div>
+          <div class="td-p-col"><span>Kelas / Unit:</span> <b id="td-kelas">-</b></div>
+          <div class="td-p-col"><span>Instansi Sekolah:</span> <b id="td-sekolah">-</b></div>
+          <div class="td-p-col"><span>Tanggal Cetak:</span> <b id="td-tanggal">-</b></div>
+        </div>
+
+        <div class="td-grid-columns">
+          <div class="td-section-card game-theme">
+            <div class="td-sec-title">🎮 GAME PERFORMANCE</div>
+            <div class="td-metric-row"><span>Total Score:</span> <b id="td-g-score">0</b></div>
+            <div class="td-metric-row"><span>Total XP:</span> <b id="td-g-xp">0 XP</b></div>
+            <div class="td-metric-row"><span>Algo Point (AP):</span> <b id="td-g-ap">0 AP</b></div>
+            <div class="td-metric-row"><span>Rank Player:</span> <b id="td-g-rank">Novice</b></div>
+            <div class="td-metric-row"><span>Lencana Terbuka:</span> <b id="td-g-badge">0 / 18</b></div>
+            <div class="td-metric-row"><span>Win Streak:</span> <b id="td-g-streak">0x</b></div>
+          </div>
+
+          <div class="td-section-card learning-theme">
+            <div class="td-sec-title">📚 LEARNING PERFORMANCE</div>
+            <div class="td-metric-row"><span>Learning Score:</span> <b id="td-l-score" style="color:#27AE60;">0</b></div>
+            <div class="td-metric-row"><span>Akurasi Evaluasi:</span> <b id="td-l-accuracy">0%</b></div>
+            <div class="td-metric-row"><span>Frekuensi Remedial:</span> <b id="td-l-remedial">0 Kali</b></div>
+            <div class="td-metric-row"><span>Status Evaluasi:</span> <b id="td-l-challenge">BELUM EVALUASI</b></div>
+          </div>
+        </div>
+
+        <div class="td-footer-actions no-print" style="margin-top: 20px; text-align: center;">
+          <button class="btn btn-kuning" onclick="printTeacherReport()">🖨️ Cetak Laporan (Print Report)</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modular JavaScript Engine Execution Order -->
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/gamification.js"></script>
+  <script src="js/achievement.js"></script>
+  <script src="js/challenges.js"></script>
+  <script src="js/leaderboard.js"></script>
+  <script src="js/feedback.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/level.js"></script>
+  <script src="js/minigames.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/worldmap.js"></script>
+  <script src="js/assessment.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/teacher.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

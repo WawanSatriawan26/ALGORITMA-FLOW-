@@ -1,0 +1,88 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: #FFFFFF;
+  border-bottom: 2px solid var(--garis);
+}
+
+.judul-bar {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--primary-tua);
+}
+
+.judul-bar small {
+  display: block;
+  font-size: 12px;
+  color: #64748B;
+}
+
+.spacer { flex: 1; }
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--garis);
+  background: #FFFFFF;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 24px;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.mod-card {
+  background: #FFFFFF;
+  border: 2px solid var(--garis);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.mod-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.mod-icon { font-size: 32px; }
+
+.stage-container {
+  flex: 1;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  padding: 16px 24px;
+  border-top: 2px solid var(--garis);
+  background: #FFFFFF;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  border-radius: 99px;
+  border: none;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.nav-back { background: #E2E8F0; color: #475569; }

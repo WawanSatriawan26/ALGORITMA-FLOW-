@@ -1,0 +1,106 @@
+.ap-badge, .xp-badge, .skor-badge {
+  background: #F1F5F9;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-weight: 900;
+  border: 1px solid var(--garis);
+}
+
+.status-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  background: #FFFFFF;
+  border: 2px solid var(--garis);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 16px 24px;
+}
+
+.status-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px dashed var(--garis);
+  padding-right: 12px;
+}
+.status-col:last-child { border-right: none; }
+
+.status-col-title {
+  font-size: 11px;
+  font-weight: 900;
+  color: #64748B;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.algobot-box {
+  background: #F0FDF4;
+  border: 2px solid #2ECC71;
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.algobot-avatar { font-size: 28px; }
+
+.quest-tabs-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: #F1F5F9;
+  padding: 4px;
+  border-radius: 99px;
+}
+
+.quest-tab-btn {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  border-radius: 99px;
+  font-weight: 800;
+  cursor: pointer;
+  background: transparent;
+  color: #64748B;
+}
+
+.quest-tab-btn.active { background: #FFFFFF; color: var(--primary-tua); }
+
+.quest-card {
+  border: 2px solid var(--garis);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.td-print-header { text-align: center; }
+.td-profile-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #F8FAFC;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.td-grid-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.td-section-card {
+  border: 2px solid var(--garis);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.td-section-card.game-theme { background: #F0F9FF; border-color: #3498DB; }
+.td-section-card.learning-theme { background: #F0FDF4; border-color: #2ECC71; }
